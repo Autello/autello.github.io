@@ -17,7 +17,9 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
-    console.log(`Total Score: ${totalScore.toFixed(2)}`);  // Debugging output
+    // Round down total score
+    let roundedScore = Math.floor(totalScore);
 
-    document.getElementById("result").innerText = `Total Score: ${totalScore.toFixed(2)}`;
+    // Display the result with "/100"
+    document.getElementById("result").innerText = `${roundedScore}/100`;
 }
