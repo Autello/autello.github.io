@@ -20,6 +20,9 @@ function calculateScore() {
     // Round down total score
     let roundedScore = Math.floor(totalScore);
 
-    // Display the result with "/100"
-    document.getElementById("result").innerText = `${roundedScore}/100`;
+    // Format the result string with all the data points
+    let resultText = `${roundedScore}/100 - ${caloriesPerOunce.toFixed(2)} cal/oz - ${caloriesPerCent.toFixed(2)} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+
+    // Display the result
+    document.getElementById("result").innerText = resultText;
 }
