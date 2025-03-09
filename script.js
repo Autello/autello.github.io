@@ -17,5 +17,7 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
+    console.log(`Total Score: ${totalScore.toFixed(2)}`);  // Debugging output
+
     document.getElementById("result").innerText = `Total Score: ${totalScore.toFixed(2)}`;
 }
