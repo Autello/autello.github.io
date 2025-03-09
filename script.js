@@ -17,11 +17,13 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
-    // Round down total score
+    // Round down total score, calories per ounce, and calories per cent
     let roundedScore = Math.floor(totalScore);
+    let roundedCaloriesPerOunce = Math.floor(caloriesPerOunce);
+    let roundedCaloriesPerCent = Math.floor(caloriesPerCent);
 
-    // Format the result string with all the data points
-    let resultText = `${roundedScore}/100 - ${caloriesPerOunce.toFixed(2)} cal/oz - ${caloriesPerCent.toFixed(2)} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+    // Format the result string
+    let resultText = `${roundedScore}/100 - ${roundedCaloriesPerOunce} cal/oz - ${roundedCaloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
 
     // Display the result
     document.getElementById("result").innerText = resultText;
