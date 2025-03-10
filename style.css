@@ -38,3 +38,17 @@ button:hover {
 h2 {
     color: #333;
 }
+
+#copyButton {
+    background: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#copyButton:hover {
+    background: #218838;
+}
+
