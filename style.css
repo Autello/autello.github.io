@@ -1,54 +1,67 @@
+/* Body Styling */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #121212; /* Dark background */
+    color: #f1f1f1; /* Light text color */
     margin: 0;
     padding: 0;
 }
 
+/* Container for the form and result */
 .container {
-    background: white;
+    background: #1f1f1f; /* Dark background for the container */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
     max-width: 400px;
     margin: 50px auto;
 }
 
+/* Input fields */
 input {
     display: block;
     margin: 10px auto;
     padding: 8px;
     width: 80%;
+    background-color: #333; /* Darker input fields */
+    color: white; /* White text inside input */
+    border: 1px solid #555; /* Lighter border for input fields */
 }
 
+/* Button Styling */
 button {
-    background: #007BFF;
+    background: #e60000; /* Red color for the button */
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #cc0000; /* Darker red when hovered */
 }
 
-h2 {
-    color: #333;
-}
-
+/* Copy Button */
 #copyButton {
-    background: #28a745; /* Green */
+    background: #e60000; /* Red color */
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
 }
 
 #copyButton:hover {
-    background: #218838;
+    background: #cc0000; /* Darker red when hovered */
 }
 
+/* Result Text */
+h2 {
+    color: #f1f1f1; /* Light text for result */
+}
