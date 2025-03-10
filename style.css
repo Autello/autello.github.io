@@ -13,10 +13,6 @@ body {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     max-width: 400px;
     margin: 50px auto;
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center;
-    width: 100%;
 }
 
 input {
@@ -24,9 +20,6 @@ input {
     margin: 10px auto;
     padding: 8px;
     width: 80%;
-    font-size: 1em;
-    border-radius: 5px;
-    border: 1px solid #ccc;
 }
 
 button {
@@ -36,8 +29,6 @@ button {
     padding: 10px;
     cursor: pointer;
     margin-top: 10px;
-    width: 80%; /* Button width to match input */
-    font-size: 1em;
 }
 
 button:hover {
@@ -46,29 +37,4 @@ button:hover {
 
 h2 {
     color: #333;
-}
-
-#result {
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 15px;
-    padding: 10px;
-    white-space: nowrap; /* Keep everything on one line */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 15px; /* Reduce padding for small screens */
-    }
-
-    input, button {
-        width: 100%; /* Make inputs and button full width on mobile */
-        font-size: 1em; /* Adjust font size */
-    }
-
-    #result {
-        font-size: 1em; /* Adjust result text size */
-    }
 }
