@@ -23,3 +23,20 @@ function calculateScore() {
     // Display the result
     document.getElementById("result").innerText = resultText;
 }
+// Clipboard functionality
+document.getElementById("copyButton").addEventListener("click", function() {
+    var resultText = document.getElementById("result").innerText;
+    
+    if (resultText === "") {
+        alert("Please calculate the score first!");
+        return;
+    }
+
+    navigator.clipboard.writeText(resultText)
+        .then(function() {
+            alert("Result copied to clipboard!");
+        })
+        .catch(function(error) {
+            console.error("Error copying text: ", error);
+        });
+});
