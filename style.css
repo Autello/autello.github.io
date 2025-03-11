@@ -38,3 +38,19 @@ button:hover {
 h2 {
     color: #333;
 }
+
+#resultsTable {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders between cells are merged */
+}
+
+#resultsTable th, #resultsTable td {
+    border: 1px solid black; /* Adds a border to both table header and table cells */
+    padding: 8px; /* Adds padding inside the cells */
+    text-align: left; /* Aligns text to the left */
+}
+
+#resultsTable th {
+    background-color: #f2f2f2; /* Adds a light background color to the headers */
+}
+
