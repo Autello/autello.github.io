@@ -77,4 +77,41 @@ function updateResultsTable(filteredResults = null) {
     });
 }
 
-// Function to search through the re
+// Function to search through the results
+function searchResults() {
+    let searchQuery = document.getElementById("search").value.toLowerCase();
+    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
+    
+    // Filter results based on the search query
+    let filteredResults = results.filter(result => result.name.toLowerCase().includes(searchQuery));
+
+    // Update the table with the filtered results
+    updateResultsTable(filteredResults);
+}
+
+// Function to clear all results
+function clearHistory() {
+    localStorage.removeItem("foodResults");
+    updateResultsTable();
+}
+
+// Function to copy the result to clipboard
+function copyToClipboard() {
+    // Get the result text
+    const resultText = document.getElementById("result").innerText;
+    console.log(resultText);  // Log the result text for debugging
+    if (resultText) {
+        navigator.clipboard.writeText(resultText).then(() => {
+            alert("Result copied to clipboard!");
+        }).catch(err => {
+            console.error("Error copying text: ", err);
+        });
+    } else {
+        alert("No result to copy.");
+    }
+}
+
+// Load results from localStorage when the page loads
+window.onload = function() {
+    updateResultsTable();
+};
