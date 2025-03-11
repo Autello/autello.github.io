@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Score Calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Add space between the search input and the table */
-        #search {
-            margin-bottom: 10px; /* Adjust the value to control the space */
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -21,36 +15,9 @@
         <label>Servings: <input type="number" id="servings"></label>
         <label>Calories per Serving: <input type="number" id="calories"></label>
         <button onclick="calculateScore()">Calculate</button>
-        <h2 id="result"></h2>
-        <button onclick="copyToClipboard()">Copy Result</button>
-        
-        <!-- Table of Results -->
-        <h3>Previous Results</h3>
-        
-        <!-- Search Input for filtering results -->
-        <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
-        
-        <!-- Add margin for space -->
-        <div style="margin-bottom: 10px;"></div> <!-- This creates space between the search field and the table -->
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Score</th>
-                    <th>Product Name</th>
-                    <th>Calories per Ounce</th>
-                    <th>Calories per Cent</th>
-                    <th>Total Calories</th>
-                </tr>
-            </thead>
-            <tbody id="resultsTableBody">
-                <!-- Results will be populated here -->
-            </tbody>
-        </table>
-        
-        <!-- Button to clear history -->
-        <button onclick="clearHistory()">Clear History</button>
+        <h2 id="result"></h2> <!-- Result is here -->
+        <button onclick="copyToClipboard()">Copy Result</button> <!-- Move Copy button here -->
     </div>
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Move this to the end of the body -->
 </body>
 </html>
