@@ -1,3 +1,6 @@
+// Array to store previous entries
+let entries = [];
+
 function calculateScore() {
     let productName = document.getElementById("productName").value.trim();  // Get product name and trim extra spaces
     let price = parseFloat(document.getElementById("price").value);
@@ -28,6 +31,54 @@ function calculateScore() {
     // Display the results
     document.getElementById("result").innerText = fullResult;  // First result with product name
     document.getElementById("simplifiedResult").innerText = simplifiedResult;  // Second result without product name
+
+    // Store the current result in the entries array
+    entries.push({
+        score: totalScore,
+        productName: productName,
+        caloriesPerOunce: caloriesPerOunce,
+        caloriesPerCent: caloriesPerCent,
+        totalCalories: totalCalories
+    });
+
+    // Update the table with new data
+    updateEntriesTable();
+}
+
+// Function to update the table with previous entries
+function updateEntriesTable() {
+    let tableBody = document.getElementById("entriesTable").getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = "";  // Clear existing table rows
+
+    // Add each entry as a new row in the table
+    entries.forEach(entry => {
+        let row = tableBody.insertRow();
+        row.insertCell(0).textContent = entry.score + "/100";
+        row.insertCell(1).textContent = entry.productName;
+        row.insertCell(2).textContent = entry.caloriesPerOunce + " cal/oz";
+        row.insertCell(3).textContent = entry.caloriesPerCent + " cal/¢";
+        row.insertCell(4).textContent = entry.totalCalories.toLocaleString() + " cal";
+    });
+}
+
+// Function to search/filter through table rows
+function searchTable() {
+    let input = document.getElementById("searchField");
+    let filter = input.value.toUpperCase();
+    let table = document.getElementById("entriesTable");
+    let tr = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {  // Skip header row
+        let td = tr[i].getElementsByTagName("td")[1];  // Search in the second column (Product Name)
+        if (td) {
+            let txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }
 
 // Clipboard functionality
