@@ -45,14 +45,12 @@ function copyToClipboard() {
         return;
     }
 
-    // Create a temporary textarea element to hold the result
-    let textArea = document.createElement("textarea");
-    textArea.value = resultText;  // Set the value to the result text
-    document.body.appendChild(textArea);  // Append to the body
-    textArea.select();  // Select the content
-    document.execCommand("copy");  // Copy the text to clipboard
-    document.body.removeChild(textArea);  // Remove the textarea element
-
-    // Optional: Show a message indicating the result has been copied
-    alert("Result copied to clipboard!");
+    // Use the Clipboard API to copy text to the clipboard
+    navigator.clipboard.writeText(resultText).then(function() {
+        // Optional: Show a message indicating the result has been copied
+        alert("Result copied to clipboard!");
+    }).catch(function(error) {
+        // Handle any errors that occur during the copy process
+        alert("Failed to copy the result: " + error);
+    });
 }
