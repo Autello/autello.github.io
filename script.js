@@ -32,27 +32,58 @@ function calculateScore() {
 
     // Display the result in the specified format
     document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
+
+    // Store result in localStorage
+    storeResult({
+        score: totalScore,
+        name: productName,
+        caloriesPerOunce: caloriesPerOunceFormatted,
+        caloriesPerCent: caloriesPerCentFormatted,
+        totalCalories: totalCaloriesFormatted
+    });
+
+    // Update table with latest results
+    updateResultsTable();
 }
 
-// New function to copy the result to the clipboard
-function copyToClipboard() {
-    // Get the result text
-    let resultText = document.getElementById("result").innerText;
-    
-    // Check if there is any result to copy
-    if (resultText.trim() === "") {
-        alert("No result to copy.");
-        return;
-    }
-
-    // Create a temporary textarea element to hold the result
-    let textArea = document.createElement("textarea");
-    textArea.value = resultText;  // Set the value to the result text
-    document.body.appendChild(textArea);  // Append to the body
-    textArea.select();  // Select the content
-    document.execCommand("copy");  // Copy the text to clipboard
-    document.body.removeChild(textArea);  // Remove the textarea element
-
-    // Optional: Show a message indicating the result has been copied
-    alert("Result copied to clipboard!");
+// Store result in localStorage
+function storeResult(result) {
+    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
+    results.push(result);
+    localStorage.setItem("foodResults", JSON.stringify(results));
 }
+
+// Update the results table
+function updateResultsTable() {
+    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
+    let tableBody = document.getElementById("resultsTableBody");
+
+    // Clear existing rows in the table
+    tableBody.innerHTML = "";
+
+    // Add rows for each result stored in localStorage
+    results.forEach(result => {
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${result.score}</td>
+            <td>${result.name}</td>
+            <td>${result.caloriesPerOunce} cal/oz</td>
+            <td>${result.caloriesPerCent} cal/¢</td>
+            <td>${result.totalCalories} cal</td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+
+// Function to clear all results
+function clearHistory() {
+    localStorage.removeItem("foodResults");
+    updateResultsTable();
+}
+
+// Load results from localStorage when the page loads
+window.onload = function() {
+    updateResultsTable();
+};
