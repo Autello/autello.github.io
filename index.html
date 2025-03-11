@@ -23,6 +23,27 @@
         <h3><strong>Copy Results:</strong> <span id="simplifiedResult"></span></h3>
 
         <button id="copyButton">Copy to Clipboard</button>
+
+        <!-- Search Field for Filtering the Table -->
+        <h3>Search Product Name:</h3>
+        <input type="text" id="searchField" onkeyup="searchTable()" placeholder="Search for names..">
+        
+        <!-- Table to display previous entries -->
+        <h3>Previous Entries</h3>
+        <table id="entriesTable">
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>Product Name</th>
+                    <th>Calories per Ounce</th>
+                    <th>Calories per Cent</th>
+                    <th>Total Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Entries will be populated here dynamically -->
+            </tbody>
+        </table>
     </div>
     <script src="script.js"></script>
 </body>
