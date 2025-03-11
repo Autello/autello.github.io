@@ -18,9 +18,6 @@
         <h2 id="result"></h2>
         <button onclick="copyToClipboard()">Copy Result</button>
         
-        <!-- Search Input for filtering results -->
-        <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
-
         <!-- Table of Results -->
         <h3>Previous Results</h3>
         <table>
@@ -37,6 +34,9 @@
                 <!-- Results will be populated here -->
             </tbody>
         </table>
+        
+        <!-- Search Input for filtering results -->
+        <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
         
         <!-- Button to clear history -->
         <button onclick="clearHistory()">Clear History</button>
