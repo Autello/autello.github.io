@@ -10,8 +10,8 @@
     <div class="calculator-container">
         <h1>Food Scoring Calculator</h1>
         <form id="calculator-form">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" placeholder="Enter product name" required>
             
             <label for="price">Price (in dollars):</label>
             <input type="number" id="price" step="0.01" required>
@@ -28,7 +28,7 @@
             <button type="button" onclick="calculateScore()">Calculate Score</button>
         </form>
         
-        <div id="results">
+        <div id="results" style="display: none;">
             <p id="name-result"></p>
             <p id="score-result"></p>
             <p id="calories-per-ounce"></p>
