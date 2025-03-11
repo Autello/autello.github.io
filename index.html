@@ -9,14 +9,19 @@
 <body>
     <div class="container">
         <h1>Food Score Calculator</h1>
-        <!-- New product name input -->
         <label>Product Name: <input type="text" id="productName"></label>
         <label>Price ($): <input type="number" id="price" step="0.01"></label>
         <label>Weight (oz): <input type="number" id="weight"></label>
         <label>Servings: <input type="number" id="servings"></label>
         <label>Calories per Serving: <input type="number" id="calories"></label>
         <button onclick="calculateScore()">Calculate</button>
+        
+        <!-- Display the result with product name -->
         <h2 id="result"></h2>
+        
+        <!-- Display the result without product name -->
+        <h3 id="simplifiedResult"></h3>
+
         <button id="copyButton">Copy to Clipboard</button>
     </div>
     <script src="script.js"></script>
