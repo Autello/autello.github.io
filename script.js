@@ -32,6 +32,43 @@ function calculateScore() {
 
     // Display the result in the specified format
     document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
+
+    // Store the result in local storage
+    let resultData = {
+        score: totalScore,
+        name: productName,
+        calOunce: caloriesPerOunceFormatted,
+        calCent: caloriesPerCentFormatted,
+        totalCalories: totalCaloriesFormatted
+    };
+
+    // Get existing results from localStorage
+    let storedResults = JSON.parse(localStorage.getItem("results")) || [];
+    storedResults.push(resultData);
+
+    // Save updated results back to localStorage
+    localStorage.setItem("results", JSON.stringify(storedResults));
+
+    // Update the results table
+    updateResultsTable();
+}
+
+function updateResultsTable() {
+    let storedResults = JSON.parse(localStorage.getItem("results")) || [];
+    let tableBody = document.getElementById("resultsTable").getElementsByTagName('tbody')[0];
+
+    // Clear existing table rows
+    tableBody.innerHTML = "";
+
+    // Populate table with stored results
+    storedResults.forEach(result => {
+        let row = tableBody.insertRow();
+        row.insertCell(0).innerText = result.score;
+        row.insertCell(1).innerText = result.name;
+        row.insertCell(2).innerText = result.calOunce;
+        row.insertCell(3).innerText = result.calCent;
+        row.insertCell(4).innerText = result.totalCalories;
+    });
 }
 
 // New function to copy the result to the clipboard
@@ -53,3 +90,8 @@ function copyToClipboard() {
         alert("Failed to copy the result: " + error);
     });
 }
+
+// Load stored results when the page loads
+window.onload = function() {
+    updateResultsTable();
+};
