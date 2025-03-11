@@ -1,5 +1,5 @@
-// Array to store previous entries
-let entries = [];
+// Load saved entries from localStorage if any
+let entries = JSON.parse(localStorage.getItem('entries')) || [];
 
 function calculateScore() {
     let productName = document.getElementById("productName").value.trim();  // Get product name and trim extra spaces
@@ -40,6 +40,9 @@ function calculateScore() {
         caloriesPerCent: caloriesPerCent,
         totalCalories: totalCalories
     });
+
+    // Update localStorage with the new entries array
+    localStorage.setItem('entries', JSON.stringify(entries));
 
     // Update the table with new data
     updateEntriesTable();
@@ -97,4 +100,9 @@ document.getElementById("copyButton").addEventListener("click", function() {
         .catch(function(error) {
             console.error("Error copying text: ", error);
         });
+});
+
+// Initialize the table on page load (with data from localStorage)
+document.addEventListener("DOMContentLoaded", function() {
+    updateEntriesTable();
 });
