@@ -17,6 +17,23 @@
         <button onclick="calculateScore()">Calculate</button>
         <h2 id="result"></h2> <!-- Result is here -->
         <button onclick="copyToClipboard()">Copy Result</button> <!-- Move Copy button here -->
+        
+        <!-- Table to display previous results -->
+        <h3>Previous Results</h3>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>Name</th>
+                    <th>Cal/oz</th>
+                    <th>Cal/¢</th>
+                    <th>Cal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Previous results will appear here -->
+            </tbody>
+        </table>
     </div>
     <script src="script.js"></script> <!-- Move this to the end of the body -->
 </body>
