@@ -33,3 +33,26 @@ function calculateScore() {
     // Display the result in the specified format
     document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
 }
+
+// New function to copy the result to the clipboard
+function copyToClipboard() {
+    // Get the result text
+    let resultText = document.getElementById("result").innerText;
+    
+    // Check if there is any result to copy
+    if (resultText.trim() === "") {
+        alert("No result to copy.");
+        return;
+    }
+
+    // Create a temporary textarea element to hold the result
+    let textArea = document.createElement("textarea");
+    textArea.value = resultText;  // Set the value to the result text
+    document.body.appendChild(textArea);  // Append to the body
+    textArea.select();  // Select the content
+    document.execCommand("copy");  // Copy the text to clipboard
+    document.body.removeChild(textArea);  // Remove the textarea element
+
+    // Optional: Show a message indicating the result has been copied
+    alert("Result copied to clipboard!");
+}
