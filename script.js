@@ -6,6 +6,12 @@ function calculateScore() {
     const servings = parseInt(document.getElementById('servings').value);
     const caloriesPerServing = parseInt(document.getElementById('calories').value);
 
+    // Validate inputs
+    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(caloriesPerServing) || name === "") {
+        alert("Please fill in all fields.");
+        return;
+    }
+
     // Perform the calculations
     const cents = price * 100;
     const totalCalories = caloriesPerServing * servings;
@@ -18,9 +24,12 @@ function calculateScore() {
     const totalScore = weightScore + priceScore;
 
     // Display the results in the desired format
-    document.getElementById('name-result').textContent = `Name: ${name}`;
+    document.getElementById('name-result').textContent = `Product: ${name}`;
     document.getElementById('score-result').textContent = `${Math.round(totalScore)}/100`;
     document.getElementById('calories-per-ounce').textContent = `${Math.round(caloriesPerOunce)} cal/oz`;
     document.getElementById('calories-per-cent').textContent = `${Math.round(caloriesPerCent)} cal/¢`;
     document.getElementById('total-calories').textContent = `${totalCalories} cal`;
+
+    // Make the results section visible
+    document.getElementById('results').style.display = 'block';
 }
