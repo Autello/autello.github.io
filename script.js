@@ -19,23 +19,27 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = Math.floor(weightScore + priceScore); // Round down final score
 
-    // Format the result string with the product name
-    let resultText = `${totalScore}/100 - ${productName} - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+    // Format the full result string (with product name)
+    let fullResult = `${totalScore}/100 - ${productName} - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
 
-    // Display the result
-    document.getElementById("result").innerText = resultText;
+    // Format the second result string (without product name)
+    let simplifiedResult = `${totalScore}/100 - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+
+    // Display the results
+    document.getElementById("result").innerText = fullResult;  // First result with product name
+    document.getElementById("simplifiedResult").innerText = simplifiedResult;  // Second result without product name
 }
 
 // Clipboard functionality
 document.getElementById("copyButton").addEventListener("click", function() {
-    var resultText = document.getElementById("result").innerText;
+    var simplifiedResultText = document.getElementById("simplifiedResult").innerText;
     
-    if (resultText === "") {
+    if (simplifiedResultText === "") {
         alert("Please calculate the score first!");
         return;
     }
 
-    navigator.clipboard.writeText(resultText)
+    navigator.clipboard.writeText(simplifiedResultText)
         .then(function() {
             alert("Result copied to clipboard!");
         })
