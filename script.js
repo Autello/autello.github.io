@@ -10,7 +10,7 @@ function calculateScore() {
 
     // Check if all values are provided, including product name
     if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories) || productName === "") {
-        document.getElementById("simplifiedResult").innerText = "Please enter all values.";  // Display error in the simplified result
+        document.getElementById("result").innerText = "Please enter all values.";
         return;
     }
 
@@ -22,11 +22,15 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = Math.floor(weightScore + priceScore); // Round down final score
 
-    // Format the second result string (without product name)
-    let simplifiedResult = `${totalScore}/100 - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+    // Format the full result string (with product name)
+    let fullResult = ${totalScore}/100 - ${productName} - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal;
 
-    // Display the simplified result
-    document.getElementById("simplifiedResult").innerText = simplifiedResult;
+    // Format the second result string (without product name)
+    let simplifiedResult = ${totalScore}/100 - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal;
+
+    // Display the results
+    document.getElementById("result").innerText = fullResult;  // First result with product name
+    document.getElementById("simplifiedResult").innerText = simplifiedResult;  // Second result without product name
 
     // Store the current result in the entries array
     entries.push({
