@@ -5,27 +5,31 @@ function calculateScore() {
     let servings = parseFloat(document.getElementById("servings").value);
     let calories = parseFloat(document.getElementById("calories").value);
 
+    // Check if all input fields have valid values
     if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories)) {
         document.getElementById("result").innerText = "Please enter all values.";
         return;
     }
 
+    // Calculate values based on the inputs
     let cents = price * 100;
     let totalCalories = calories * servings;
     let caloriesPerCent = totalCalories / cents;
     let caloriesPerOunce = totalCalories / weight;
+
+    // Calculate weight and price scores
     let weightScore = (caloriesPerOunce / 240) * 50;
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
-    // Round down the total score to the nearest whole number
+    // Round the total score down to the nearest whole number
     totalScore = Math.floor(totalScore);
 
-    // Prepare the result format
-    let caloriesPerOunceFormatted = caloriesPerOunce.toFixed(0);
-    let caloriesPerCentFormatted = caloriesPerCent.toFixed(0);
-    let totalCaloriesFormatted = totalCalories.toLocaleString(); // Adds comma for large numbers
+    // Format the results (calories per ounce, calories per cent, total calories)
+    let caloriesPerOunceFormatted = caloriesPerOunce.toFixed(0); // Remove decimals
+    let caloriesPerCentFormatted = caloriesPerCent.toFixed(0);   // Remove decimals
+    let totalCaloriesFormatted = totalCalories.toLocaleString(); // Add commas for large numbers
 
-    // Display the result in the desired format
+    // Display the result in the specified format
     document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
 }
