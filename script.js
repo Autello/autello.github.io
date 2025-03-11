@@ -1,10 +1,11 @@
 function calculateScore() {
+    let productName = document.getElementById("productName").value;  // Get product name
     let price = parseFloat(document.getElementById("price").value);
     let weight = parseFloat(document.getElementById("weight").value);
     let servings = parseFloat(document.getElementById("servings").value);
     let calories = parseFloat(document.getElementById("calories").value);
 
-    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories)) {
+    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories) || !productName) {
         document.getElementById("result").innerText = "Please enter all values.";
         return;
     }
@@ -17,12 +18,13 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = Math.floor(weightScore + priceScore); // Round down final score
 
-    // Format the result string
-    let resultText = `${totalScore}/100 - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
+    // Format the result string with the product name
+    let resultText = `${totalScore}/100 - ${productName} - ${caloriesPerOunce} cal/oz - ${caloriesPerCent} cal/¢ - ${totalCalories.toLocaleString()} cal`;
 
     // Display the result
     document.getElementById("result").innerText = resultText;
 }
+
 // Clipboard functionality
 document.getElementById("copyButton").addEventListener("click", function() {
     var resultText = document.getElementById("result").innerText;
