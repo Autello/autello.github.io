@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Score Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add space between the search input and the table */
+        #search {
+            margin-bottom: 10px; /* Adjust the value to control the space */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -24,8 +30,8 @@
         <!-- Search Input for filtering results -->
         <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
         
-        <!-- Add a blank line -->
-        <br>
+        <!-- Add margin for space -->
+        <div style="margin-bottom: 10px;"></div> <!-- This creates space between the search field and the table -->
         
         <table>
             <thead>
