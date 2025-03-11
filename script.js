@@ -1,4 +1,5 @@
 function calculateScore() {
+    let productName = document.getElementById("productName").value;
     let price = parseFloat(document.getElementById("price").value);
     let weight = parseFloat(document.getElementById("weight").value);
     let servings = parseFloat(document.getElementById("servings").value);
@@ -17,5 +18,14 @@ function calculateScore() {
     let priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
-    document.getElementById("result").innerText = `Total Score: ${totalScore.toFixed(2)}`;
+    // Round down the total score to the nearest whole number
+    totalScore = Math.floor(totalScore);
+
+    // Prepare the result format
+    let caloriesPerOunceFormatted = caloriesPerOunce.toFixed(0);
+    let caloriesPerCentFormatted = caloriesPerCent.toFixed(0);
+    let totalCaloriesFormatted = totalCalories.toLocaleString(); // Adds comma for large numbers
+
+    // Display the result in the desired format
+    document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
 }
