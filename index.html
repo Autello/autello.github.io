@@ -3,40 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Scoring Calculator</title>
+    <title>Food Score Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Food Scoring Calculator</h1>
-        <form id="calculator-form">
-            <label for="name">Product Name:</label>
-            <input type="text" id="name" placeholder="Enter product name" required>
-            
-            <label for="price">Price (in dollars):</label>
-            <input type="number" id="price" step="0.01" required>
-            
-            <label for="weight">Weight (in ounces):</label>
-            <input type="number" id="weight" step="0.1" required>
-            
-            <label for="servings">Total Servings:</label>
-            <input type="number" id="servings" required>
-            
-            <label for="calories">Calories per Serving:</label>
-            <input type="number" id="calories" required>
-
-            <button type="button" onclick="calculateScore()">Calculate Score</button>
-        </form>
-        
-        <div id="results" style="display: none;">
-            <p id="name-result"></p>
-            <p id="score-result"></p>
-            <p id="calories-per-ounce"></p>
-            <p id="calories-per-cent"></p>
-            <p id="total-calories"></p>
-        </div>
+    <div class="container">
+        <h1>Food Score Calculator</h1>
+        <label>Price ($): <input type="number" id="price" step="0.01"></label>
+        <label>Weight (oz): <input type="number" id="weight"></label>
+        <label>Servings: <input type="number" id="servings"></label>
+        <label>Calories per Serving: <input type="number" id="calories"></label>
+        <button onclick="calculateScore()">Calculate</button>
+        <h2 id="result"></h2>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
