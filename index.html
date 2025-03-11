@@ -20,6 +20,10 @@
         
         <!-- Table of Results -->
         <h3>Previous Results</h3>
+        
+        <!-- Search Input for filtering results -->
+        <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
+        
         <table>
             <thead>
                 <tr>
@@ -34,9 +38,6 @@
                 <!-- Results will be populated here -->
             </tbody>
         </table>
-        
-        <!-- Search Input for filtering results -->
-        <label for="search">Search Products: <input type="text" id="search" oninput="searchResults()"></label>
         
         <!-- Button to clear history -->
         <button onclick="clearHistory()">Clear History</button>
