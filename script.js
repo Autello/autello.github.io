@@ -1,11 +1,12 @@
 function calculateScore() {
-    let productName = document.getElementById("productName").value;  // Get product name
+    let productName = document.getElementById("productName").value.trim();  // Get product name and trim extra spaces
     let price = parseFloat(document.getElementById("price").value);
     let weight = parseFloat(document.getElementById("weight").value);
     let servings = parseFloat(document.getElementById("servings").value);
     let calories = parseFloat(document.getElementById("calories").value);
 
-    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories) || !productName) {
+    // Check if all values are provided, including product name
+    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories) || productName === "") {
         document.getElementById("result").innerText = "Please enter all values.";
         return;
     }
