@@ -71,4 +71,34 @@ function searchTable() {
         let td = tr[i].getElementsByTagName("td")[1];  // Search in the second column (Product Name)
         if (td) {
             let txtValue = td.textContent || td.innerText;
-       
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// Clipboard functionality
+document.getElementById("copyButton").addEventListener("click", function() {
+    var simplifiedResultText = document.getElementById("simplifiedResult").innerText;
+    
+    if (simplifiedResultText === "") {
+        alert("Please calculate the score first!");
+        return;
+    }
+
+    navigator.clipboard.writeText(simplifiedResultText)
+        .then(function() {
+            alert("Result copied to clipboard!");
+        })
+        .catch(function(error) {
+            console.error("Error copying text: ", error);
+        });
+});
+
+// Initialize the table on page load (with data from localStorage)
+document.addEventListener("DOMContentLoaded", function() {
+    updateEntriesTable();
+});
