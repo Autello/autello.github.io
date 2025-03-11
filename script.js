@@ -77,25 +77,4 @@ function updateResultsTable(filteredResults = null) {
     });
 }
 
-// Function to search through the results
-function searchResults() {
-    let searchQuery = document.getElementById("search").value.toLowerCase();
-    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
-    
-    // Filter results based on the search query
-    let filteredResults = results.filter(result => result.name.toLowerCase().includes(searchQuery));
-
-    // Update the table with the filtered results
-    updateResultsTable(filteredResults);
-}
-
-// Function to clear all results
-function clearHistory() {
-    localStorage.removeItem("foodResults");
-    updateResultsTable();
-}
-
-// Load results from localStorage when the page loads
-window.onload = function() {
-    updateResultsTable();
-};
+// Function to search through the re
