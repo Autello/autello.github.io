@@ -99,14 +99,19 @@ function clearHistory() {
 function copyToClipboard() {
     // Get the result text
     const resultText = document.getElementById("result").innerText;
-    console.log(resultText);  // Log the result text for debugging
+    console.log("Attempting to copy result: " + resultText); // Debugging line
+
     if (resultText) {
+        // Try copying the result text to clipboard
         navigator.clipboard.writeText(resultText).then(() => {
+            console.log("Successfully copied the result to the clipboard!");
             alert("Result copied to clipboard!");
         }).catch(err => {
             console.error("Error copying text: ", err);
+            alert("Failed to copy text: " + err);
         });
     } else {
+        console.log("No result to copy.");
         alert("No result to copy.");
     }
 }
