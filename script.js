@@ -47,9 +47,11 @@ function copyToClipboard() {
 
     // Use the Clipboard API to copy text to the clipboard
     navigator.clipboard.writeText(resultText).then(function() {
-        // Show a message indicating the result has been copied
+        // Optional: Show a message indicating the result has been copied
         alert("Result copied to clipboard!");
     }).catch(function(error) {
-        alert("Failed to copy the result: " + error);
+        // Log the error for debugging
+        console.error("Clipboard copy failed:", error);
+        alert("Failed to copy the result. Please try again.");
     });
 }
