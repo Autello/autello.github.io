@@ -54,8 +54,8 @@ function storeResult(result) {
 }
 
 // Update the results table
-function updateResultsTable() {
-    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
+function updateResultsTable(filteredResults = null) {
+    let results = filteredResults || JSON.parse(localStorage.getItem("foodResults")) || [];
     let tableBody = document.getElementById("resultsTableBody");
 
     // Clear existing rows in the table
@@ -75,6 +75,18 @@ function updateResultsTable() {
 
         tableBody.appendChild(row);
     });
+}
+
+// Function to search through the results
+function searchResults() {
+    let searchQuery = document.getElementById("search").value.toLowerCase();
+    let results = JSON.parse(localStorage.getItem("foodResults")) || [];
+    
+    // Filter results based on the search query
+    let filteredResults = results.filter(result => result.name.toLowerCase().includes(searchQuery));
+
+    // Update the table with the filtered results
+    updateResultsTable(filteredResults);
 }
 
 // Function to clear all results
