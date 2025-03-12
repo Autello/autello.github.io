@@ -39,3 +39,15 @@ h2 {
     color: #333;
 }
 
+/* Add border to all table cells (header and data) */
+#resultsTable th, #resultsTable td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Optional: Add some extra styling to make it more readable */
+#resultsTable th {
+    background-color: #f2f2f2;
+}
+
