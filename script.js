@@ -63,26 +63,11 @@ function updateResultsTable() {
     // Populate table with stored results
     storedResults.forEach(result => {
         let row = tableBody.insertRow();
-        
-        let cell1 = row.insertCell(0);
-        cell1.innerText = result.score;
-        cell1.classList.add("bordered");  // Add the class for borders
-
-        let cell2 = row.insertCell(1);
-        cell2.innerText = result.name;
-        cell2.classList.add("bordered");  // Add the class for borders
-
-        let cell3 = row.insertCell(2);
-        cell3.innerText = result.calOunce;
-        cell3.classList.add("bordered");  // Add the class for borders
-
-        let cell4 = row.insertCell(3);
-        cell4.innerText = result.calCent;
-        cell4.classList.add("bordered");  // Add the class for borders
-
-        let cell5 = row.insertCell(4);
-        cell5.innerText = result.totalCalories;
-        cell5.classList.add("bordered");  // Add the class for borders
+        row.insertCell(0).innerText = result.score;
+        row.insertCell(1).innerText = result.name;
+        row.insertCell(2).innerText = result.calOunce;
+        row.insertCell(3).innerText = result.calCent;
+        row.insertCell(4).innerText = result.totalCalories;
     });
 }
 
