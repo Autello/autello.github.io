@@ -55,13 +55,19 @@ function calculateScore() {
 
 function updateResultsTable() {
     let storedResults = JSON.parse(localStorage.getItem("results")) || [];
+    let searchQuery = document.getElementById("search").value.toLowerCase(); // Get the search query
     let tableBody = document.getElementById("resultsTable").getElementsByTagName('tbody')[0];
 
     // Clear existing table rows
     tableBody.innerHTML = "";
 
-    // Populate table with stored results
-    storedResults.forEach(result => {
+    // Filter the results based on the search query (case-insensitive)
+    let filteredResults = storedResults.filter(result => 
+        result.name.toLowerCase().includes(searchQuery)
+    );
+
+    // Populate table with filtered results
+    filteredResults.forEach(result => {
         let row = tableBody.insertRow();
         
         let cell1 = row.insertCell(0);
@@ -85,6 +91,9 @@ function updateResultsTable() {
         cell5.style.textAlign = 'center';
     });
 }
+
+// Event listener for the search input field
+document.getElementById("search").addEventListener("input", updateResultsTable);
 
 // New function to copy the result to the clipboard
 function copyToClipboard() {
