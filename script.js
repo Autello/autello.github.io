@@ -67,22 +67,27 @@ function updateResultsTable() {
         let cell1 = row.insertCell(0);
         cell1.innerText = result.score;
         cell1.style.textAlign = 'center';
+        cell1.style.border = '1px solid black';  // Add border here
 
         let cell2 = row.insertCell(1);
         cell2.innerText = result.name;
         cell2.style.textAlign = 'center';
+        cell2.style.border = '1px solid black';  // Add border here
 
         let cell3 = row.insertCell(2);
         cell3.innerText = result.calOunce;
         cell3.style.textAlign = 'center';
+        cell3.style.border = '1px solid black';  // Add border here
 
         let cell4 = row.insertCell(3);
         cell4.innerText = result.calCent;
         cell4.style.textAlign = 'center';
+        cell4.style.border = '1px solid black';  // Add border here
 
         let cell5 = row.insertCell(4);
         cell5.innerText = result.totalCalories;
         cell5.style.textAlign = 'center';
+        cell5.style.border = '1px solid black';  // Add border here
     });
 }
 
