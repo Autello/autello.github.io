@@ -1,41 +1,74 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+    font-family: sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
-    background: white;
-    padding: 20px;
+    background: #fff;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 50px auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-input {
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
     display: block;
-    margin: 10px auto;
-    padding: 8px;
-    width: 80%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Prevents padding from adding to width */
 }
 
 button {
-    background: #007BFF;
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #0056b3;
+    background-color: #0056b3;
 }
 
-h2 {
-    color: #333;
+#result {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    color: #495057;
+    min-height: 30px; /* Ensure it's visible even when empty */
+    word-wrap: break-word; /* Prevent long results from overflowing */
 }
 
+.error {
+    color: red;
+    font-weight: normal;
+    font-size: 0.95em;
+}
