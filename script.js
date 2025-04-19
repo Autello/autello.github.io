@@ -1,121 +1,75 @@
-function calculateScore() {
-    let productName = document.getElementById("productName").value;
-    let price = parseFloat(document.getElementById("price").value);
-    let weight = parseFloat(document.getElementById("weight").value);
-    let servings = parseFloat(document.getElementById("servings").value);
-    let calories = parseFloat(document.getElementById("calories").value);
+// Get references to HTML elements
+const priceInput = document.getElementById('price');
+const weightInput = document.getElementById('weight');
+const servingsInput = document.getElementById('servings');
+const caloriesInput = document.getElementById('calories');
+const calculateBtn = document.getElementById('calculateBtn');
+const resultDiv = document.getElementById('result');
 
-    // Check if all input fields have valid values
-    if (isNaN(price) || isNaN(weight) || isNaN(servings) || isNaN(calories)) {
-        document.getElementById("result").innerText = "Please enter all values.";
+// Add event listener to the button
+calculateBtn.addEventListener('click', calculateAndDisplay);
+
+// Also allow pressing Enter in the last input field to trigger calculation
+caloriesInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent default form submission if it were in a form
+        calculateAndDisplay();
+    }
+});
+
+
+function calculateAndDisplay() {
+    // --- 1. Get and Validate Inputs ---
+    const price = parseFloat(priceInput.value);
+    const weight = parseFloat(weightInput.value);
+    const totalServings = parseFloat(servingsInput.value);
+    const caloriesPerServing = parseFloat(caloriesInput.value);
+
+    // Clear previous results/errors
+    resultDiv.innerHTML = '';
+    resultDiv.classList.remove('error');
+
+    // Basic validation
+    if (isNaN(price) || isNaN(weight) || isNaN(totalServings) || isNaN(caloriesPerServing)) {
+        resultDiv.innerHTML = '<span class="error">Please enter valid numbers in all fields.</span>';
+        resultDiv.classList.add('error');
         return;
     }
+    if (price <= 0 || weight <= 0 || totalServings <= 0 || caloriesPerServing < 0) {
+         resultDiv.innerHTML = '<span class="error">Price, Weight, and Servings must be positive. Calories cannot be negative.</span>';
+         resultDiv.classList.add('error');
+         return;
+    }
 
-    // Calculate values based on the inputs
-    let cents = price * 100;
-    let totalCalories = calories * servings;
-    let caloriesPerCent = totalCalories / cents;
-    let caloriesPerOunce = totalCalories / weight;
+    // --- 2. Perform Calculations ---
+    const cents = price * 100;
+    const totalCalories = caloriesPerServing * totalServings;
 
-    // Calculate weight and price scores
-    let weightScore = (caloriesPerOunce / 240) * 50;
-    let priceScore = (caloriesPerCent / 30) * 50;
+    // Avoid division by zero (cents already validated as > 0 via price)
+    const caloriesPerCent = totalCalories / cents;
+    // Avoid division by zero (weight already validated > 0)
+    const caloriesPerOunce = totalCalories / weight;
+
+    // --- 3. Calculate Scores ---
+    // Avoid division by zero in scoring denominators implicitly handled by previous checks
+    const weightScore = (caloriesPerOunce / 240) * 50;
+    const priceScore = (caloriesPerCent / 30) * 50;
     let totalScore = weightScore + priceScore;
 
-    // Round the total score down to the nearest whole number
-    totalScore = Math.floor(totalScore);
+    // Cap the score at 100 if necessary (optional)
+    // totalScore = Math.min(totalScore, 100);
 
-    // Format the results (calories per ounce, calories per cent, total calories)
-    let caloriesPerOunceFormatted = caloriesPerOunce.toFixed(0); // Remove decimals
-    let caloriesPerCentFormatted = caloriesPerCent.toFixed(0);   // Remove decimals
-    let totalCaloriesFormatted = totalCalories.toLocaleString(); // Add commas for large numbers
+    // --- 4. Format Output ---
+    const formattedTotalScore = Math.round(totalScore); // Round to nearest whole number for XX/100
+    const formattedCalPerOz = caloriesPerOunce.toFixed(0); // Round to whole number like example
+    const formattedCalPerCent = caloriesPerCent.toFixed(0); // Round to whole number like example
+    // Format total calories with commas for readability, but remove for final output to match example
+    const formattedTotalCaloriesWithCommas = totalCalories.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    const formattedTotalCalories = formattedTotalCaloriesWithCommas.replace(/,/g, ''); // Use replace to remove commas
 
-    // Display the result in the specified format
-    document.getElementById("result").innerText = `${totalScore}/100 - ${caloriesPerOunceFormatted} cal/oz - ${caloriesPerCentFormatted} cal/¢ - ${totalCaloriesFormatted} cal`;
+    // Construct the final output string based on the example format
+    const outputString = `${formattedTotalScore}/100 - ${formattedCalPerOz} cal/oz - ${formattedCalPerCent} cal/¢ - ${formattedTotalCalories} cal`;
 
-    // Store the result in local storage
-    let resultData = {
-        score: totalScore,
-        name: productName,
-        calOunce: caloriesPerOunceFormatted,
-        calCent: caloriesPerCentFormatted,
-        totalCalories: totalCaloriesFormatted
-    };
-
-    // Get existing results from localStorage
-    let storedResults = JSON.parse(localStorage.getItem("results")) || [];
-    storedResults.push(resultData);
-
-    // Save updated results back to localStorage
-    localStorage.setItem("results", JSON.stringify(storedResults));
-
-    // Update the results table
-    updateResultsTable();
+    // --- 5. Display Result ---
+    resultDiv.textContent = outputString;
 }
-
-function updateResultsTable() {
-    let storedResults = JSON.parse(localStorage.getItem("results")) || [];
-    let searchQuery = document.getElementById("search").value.toLowerCase(); // Get the search query
-    let tableBody = document.getElementById("resultsTable").getElementsByTagName('tbody')[0];
-
-    // Clear existing table rows
-    tableBody.innerHTML = "";
-
-    // Filter the results based on the search query (case-insensitive)
-    let filteredResults = storedResults.filter(result => 
-        result.name.toLowerCase().includes(searchQuery)
-    );
-
-    // Populate table with filtered results
-    filteredResults.forEach(result => {
-        let row = tableBody.insertRow();
-        
-        let cell1 = row.insertCell(0);
-        cell1.innerText = result.score;
-        cell1.style.textAlign = 'center';
-
-        let cell2 = row.insertCell(1);
-        cell2.innerText = result.name;
-        cell2.style.textAlign = 'center';
-
-        let cell3 = row.insertCell(2);
-        cell3.innerText = result.calOunce;
-        cell3.style.textAlign = 'center';
-
-        let cell4 = row.insertCell(3);
-        cell4.innerText = result.calCent;
-        cell4.style.textAlign = 'center';
-
-        let cell5 = row.insertCell(4);
-        cell5.innerText = result.totalCalories;
-        cell5.style.textAlign = 'center';
-    });
-}
-
-// Event listener for the search input field
-document.getElementById("search").addEventListener("input", updateResultsTable);
-
-// New function to copy the result to the clipboard
-function copyToClipboard() {
-    // Get the result text
-    let resultText = document.getElementById("result").innerText;
-    
-    // Check if there is any result to copy
-    if (resultText.trim() === "") {
-        alert("No result to copy.");
-        return;
-    }
-
-    // Use the Clipboard API to copy text to the clipboard
-    navigator.clipboard.writeText(resultText).then(function() {
-        // Show a message indicating the result has been copied
-        alert("Result copied to clipboard!");
-    }).catch(function(error) {
-        alert("Failed to copy the result: " + error);
-    });
-}
-
-// Load stored results when the page loads
-window.onload = function() {
-    updateResultsTable();
-};
